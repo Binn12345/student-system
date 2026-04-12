@@ -17,6 +17,9 @@
 
     <?= AppFooterPage(); ?>
 
+
+    <!-- sample function footer -->
+
 </body>
 
 </html>

@@ -6,6 +6,15 @@
 //     $password = password_hash("12345", PASSWORD_BCRYPT);
 // echo $password;
 
+session_start();
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: 0");
+if (isset($_SESSION['user_id'])) {
+    header("Location: admin/dashboard.php");
+    exit();
+}
 
 ?>
 <!DOCTYPE html>
@@ -23,7 +32,7 @@
         </div>
     </main>
 
-    <?php AppFooterPage(); ?>
+    <?= AppFooterPage(); ?>
 
 
     <!-- sample function footer -->

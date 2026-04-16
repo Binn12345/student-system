@@ -1,4 +1,22 @@
 <?php require_once "../view_func.php"; ?>
+<?php
+session_start();
+
+// Prevent cache
+// header("Cache-Control: no-cache, no-store, must-revalidate");
+// header("Pragma: no-cache");
+// header("Expires: 0");
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: 0");
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -221,7 +239,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="../logout.php">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -1119,9 +1137,9 @@
     </section>
 
   </main><!-- End #main -->
-
+  <?= AppFooterPage(true); ?>
   
-    <?php AppFooterPage(); ?>
+  
 </body>
 
 </html>

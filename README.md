@@ -51,6 +51,7 @@ It integrates **student enrollment**, **payment tracking**, and **records manage
 
 ### Software  
 - Web Browser (Chrome, Firefox, Edge)  
-- Backend (Node.js / PHP / Python)  
+<!-- - Backend (Node.js / PHP / Python)   -->
+- Backend ( PHP )  
 - Database (MySQL / PostgreSQL / MongoDB)  
 

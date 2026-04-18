@@ -1,5 +1,26 @@
 <?php
+require_once "db.php";
 
+function showUserRole($selected = '')
+{
+    global $conn;
+
+    $output = '<select id="role" name="role" class="form-control select2">';
+
+    $output .= "<option value=''>-- Select Role --</option>";
+
+    $sql = "SELECT * FROM roles ORDER BY role_name ASC";
+    $result = mysqli_query($conn, $sql);
+
+    while($row = mysqli_fetch_assoc($result)){
+        $isSelected = ($selected == $row['id']) ? 'selected' : '';
+        $output .= "<option value='{$row['id']}' {$isSelected}>{$row['role_name']}</option>";
+    }
+
+    $output .= '</select>';
+
+    return $output;
+}
 
 function AppHeadPage($isFolder = false)
 {
@@ -166,6 +187,7 @@ function AppFooterPage($isFolder = false)
     <script src='$assets/vendor/simple-datatables/simple-datatables.js'></script>
     <script src='$assets/vendor/tinymce/tinymce.min.js'></script>
     <script src='$assets/vendor/php-email-form/validate.js'></script>
+
 
     <!-- Template Main JS File -->
     <script src='$assets/js/main.js'></script>";

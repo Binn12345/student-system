@@ -73,10 +73,10 @@ $("#btnLogin").click(function(){
                 }).then(() => {
 
                     // ROLE BASED REDIRECT
-                    if(res.role === "admin"){
+                    if(res.role === "1"){
                         window.location.href = "admin/dashboard.php";
                     } 
-                    else if(res.role === "staff"){
+                    else if(res.role === "4"){
                         window.location.href = "staff/dashboard.php";
                     } 
                     else {

@@ -1,38 +1,58 @@
 <?php
 require_once "db.php";
 
-function showUserRole($selected = '')
-{
+
+function getRoles($rid) {
     global $conn;
 
-    $output = '<select id="role" name="role" class="form-control select2">';
+    if (empty($rid)) return '';
 
-    $output .= "<option value=''>-- Select Role --</option>";
+    $stmt = $conn->prepare("SELECT role_name FROM roles WHERE id=?");
+    $stmt->bind_param("i", $rid);
+    $stmt->execute();
 
-    $sql = "SELECT * FROM roles ORDER BY role_name ASC";
-    $result = mysqli_query($conn, $sql);
+    $result = $stmt->get_result();
 
-    while($row = mysqli_fetch_assoc($result)){
-        $isSelected = ($selected == $row['id']) ? 'selected' : '';
-        $output .= "<option value='{$row['id']}' {$isSelected}>{$row['role_name']}</option>";
+    if ($row = $result->fetch_assoc()) {
+        return $row['role_name'];
     }
 
-    $output .= '</select>';
+    return '';
+}
+function showUserRole($selected = '')
+{
+  global $conn;
 
-    return $output;
+  $output = '<select id="role" name="role" class="form-control select2">';
+
+  $output .= "<option value=''>-- Select Role --</option>";
+
+  $sql = "SELECT * FROM roles ORDER BY role_name ASC";
+  $result = mysqli_query($conn, $sql);
+
+  while ($row = mysqli_fetch_assoc($result)) {
+    $isSelected = ($selected == $row['id']) ? 'selected' : '';
+    $output .= "<option value='{$row['id']}' {$isSelected}>{$row['role_name']}</option>";
+  }
+
+  $output .= '</select>';
+
+  return $output;
 }
 
 function AppHeadPage($isFolder = false)
 {
-    $assets = "assets";
-    if ($isFolder) $assets = "../assets";
-    return "<head>
+  $assets = "assets";
+  if ($isFolder) $assets = "../assets";
+  return "<head>
         <meta charset='utf-8'>
         <meta content='width=device-width, initial-scale=1.0' name='viewport'>
 
-        <title>Pages / Login - NiceAdmin Bootstrap Template</title>
-        <meta content='' name='description'>
-        <meta content='' name='keywords'>
+        <title>Student Management System | </title>
+<meta name='description' content='Access the Student Management System to manage student records, enrollment, grades, attendance, and academic information efficiently.'>
+<meta name='keywords' content='Student Management System, SMS, student portal, school management, enrollment system, grades tracking, attendance system, education software'>
+<meta name='author' content='Your Organization Name'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 
         <!-- Favicons -->
         <link href='$assets/img/favicon.png' rel='icon'>
@@ -92,7 +112,7 @@ function AppLoginPage()
 {
 
 
-    return "
+  return "
             <section class='section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4'>
         <div class='container'>
           <div class='row justify-content-center'>
@@ -173,10 +193,10 @@ function AppLoginPage()
 
 function AppFooterPage($isFolder = false)
 {
-                  // var_dump($isFolder);die;
-    $assets = "assets";
-    if ($isFolder) $assets = "../assets";
-    return "<a href='#' class='back-to-top d-flex align-items-center justify-content-center'><i class='bi bi-arrow-up-short'></i></a>
+  // var_dump($isFolder);die;
+  $assets = "assets";
+  if ($isFolder) $assets = "../assets";
+  return "<a href='#' class='back-to-top d-flex align-items-center justify-content-center'><i class='bi bi-arrow-up-short'></i></a>
 
     <!-- Vendor JS Files -->
     <script src='$assets/vendor/apexcharts/apexcharts.min.js'></script>

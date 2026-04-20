@@ -39,7 +39,7 @@ $output .= "
   <td><span class='badge bg-secondary px-3 py-2'>{$ole}</span></td>
   <td>{$status}</td>
   <td>
-    <button class='btn btn-warning btn-sm btnEdit'>Edit</button>
+    <button class='btn btn-warning btn-sm btnEdit' data-id='{$row['id']}'>Edit</button>
     <button class='btn btn-danger btn-sm btnDelete' data-id='{$row['id']}'>Delete</button>
   </td>
 </tr>

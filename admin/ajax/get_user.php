@@ -1,4 +1,5 @@
 <?php
+// var_dump('<pre>',$_POST);
 include '../../db.php';
 
 $id = $_POST['id'];

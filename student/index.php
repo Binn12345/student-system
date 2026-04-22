@@ -64,7 +64,7 @@ if (!isset($_SESSION['user_id'])) {
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
+          <li class="breadcrumb-item active">Announcement</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->

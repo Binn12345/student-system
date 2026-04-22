@@ -1,6 +1,26 @@
-<!-- ======= Header ======= -->
-    <header id="header" class="header fixed-top d-flex align-items-center">
+/* DARK MODE */
+<style>
+.dark-mode {
+    background-color: #121212 !important;
+    color: #e4e4e4 !important;
+}
 
+/* optional: sidebar */
+.dark-mode .sidebar {
+    background-color: #1e1e1e !important;
+}
+
+/* optional: header */
+.dark-mode .header {
+    background-color: #1a1a1a !important;
+}    
+  
+</style>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+<button id="themeToggle" class="btn btn-link text-decoration-none ms-auto">
+    <i id="themeIcon" class="bi bi-moon-fill fs-5"></i>
+</button>
         <div class="d-flex align-items-center justify-content-between">
             <a href="index.html" class="logo d-flex align-items-center">
                 <img src="assets/img/logo.png" alt="">
@@ -226,3 +246,31 @@
         </nav><!-- End Icons Navigation -->
 
     </header><!-- End Header -->
+
+    <script>
+const toggle = document.getElementById("themeToggle");
+const icon = document.getElementById("themeIcon");
+
+toggle.addEventListener("click", function () {
+    document.body.classList.toggle("dark-mode");
+
+    if (document.body.classList.contains("dark-mode")) {
+        icon.classList.remove("bi-moon-fill");
+        icon.classList.add("bi-sun-fill");
+        localStorage.setItem("theme", "dark");
+    } else {
+        icon.classList.remove("bi-sun-fill");
+        icon.classList.add("bi-moon-fill");
+        localStorage.setItem("theme", "light");
+    }
+});
+
+// load saved theme
+window.onload = function () {
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+        icon.classList.remove("bi-moon-fill");
+        icon.classList.add("bi-sun-fill");
+    }
+};
+</script>

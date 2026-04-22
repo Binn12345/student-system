@@ -80,7 +80,7 @@ $("#btnLogin").click(function(){
                         window.location.href = "staff/dashboard.php";
                     } 
                     else {
-                        window.location.href = "student/portal.php";
+                        window.location.href = "student/";
                     }
 
                 });

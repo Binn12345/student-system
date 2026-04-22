@@ -21,8 +21,17 @@ if ($pageLoad2 === "students/index.php") {
 
 
 // var_dump('<pre>',$_POST,$_GET,$_SESSION,$_SERVER,$pageLoad);die;
+
+// var_dump('<pre>',$_POST,$_SESSION);die;
 ?>
 
+
+
+
+
+
+
+<?php if($_SESSION['role'] == 1) { ?>
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
 
@@ -127,4 +136,99 @@ if ($pageLoad2 === "students/index.php") {
 
     </ul>
 
-</aside><!-- End Sidebar-->
+</aside>
+<!-- End Sidebar-->
+<?php } else if ($_SESSION['role'] == 2) { ?>
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link " href="<?=$connect?>dashboard.php">
+                <i class="bi bi-grid"></i>
+                <span>Announcement</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
+
+
+
+        <li class="nav-heading">Pages</li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="<?=$connect?>users.php">
+                <i class="bi bi-person"></i>
+                <span>Enrollment</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
+
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>Subjects/Class List</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>Grades</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
+
+      
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>Attendance</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
+
+        
+  
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>Documents</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>Reports</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
+
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>Billing</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>Payments</span>
+            </a>
+        </li><!-- End Profile Page Nav -->
+
+
+        
+
+    </ul>
+
+</aside>
+<!-- End Sidebar-->
+
+<?php }  ?>
+
+
+
+
+?>

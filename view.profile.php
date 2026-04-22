@@ -26,8 +26,27 @@ $continueURL = 'dito';
 $sql = "SELECT * FROM users WHERE username = '{$uid}'";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_num_rows($result);
+// var_dump('<pre>',$row);
+if ($row == 0) {
+    $sql = "SELECT * FROM students WHERE student_no = '{$uid}'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_num_rows($result);
+}
 
 $rows = mysqli_fetch_assoc($result);
+
+
+// var_dump('<pre>',$rows['full_name']);
+$fullname = '';
+$role = 'Student';
+if (!empty($rows)) {
+    if (isset($rows['full_name'])) {
+        $fullname = $rows['full_name'];
+        $role = $rows['role'];
+    } else {
+        $fullname = $rows['last_name'] . ", " . $rows['first_name'];
+    }
+}
 
 // IMAGE DISPLAY (BLOB)
 
@@ -61,7 +80,7 @@ if (!empty($rows['image'])) {
     <?php require_once('global-sidebar.php'); ?>
     <!-- End Sidebar-->
 
-    <?php if ($row == 0) { ?>
+    <?php if ($row == 0 || !in_array($_GET['d'],array("sm","um"))) { ?>
 
         <main id="main" class="main">
             <div class="container">
@@ -105,8 +124,8 @@ if (!empty($rows['image'])) {
                             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                                 <?= $image ?>
                                 <!-- <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> -->
-                                <h2><?= $rows['full_name'] ?></h2>
-                                <h3><?= $rows['role'] ?></h3>
+                                <h2><?= $fullname ?></h2>
+                                <h3><?= $role ?></h3>
                                 <div class="social-links mt-2">
                                     <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                                     <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -133,12 +152,27 @@ if (!empty($rows['image'])) {
                                         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
                                     </li>
 
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>
-                                    </li>
+                                    </li> -->
 
                                     <li class="nav-item">
-                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+                                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password" >Change Password</button>
+                                    </li>
+
+                                    <?php
+
+                                    // var_dump('<pre>',,$_POST);
+                                    $loc = "User Management";
+                                    $hrf = "admin/users.php";
+                                    if(isset($_GET['d']) && $_GET['d'] === "sm") {
+                                        $loc = "Student Management";
+                                        $hrf = "admin/students";
+                                    } 
+                                    ?>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link  nav-href" href="<?= $hrf ?>" >Back to <?= $loc ?></a>
                                     </li>
 
                                 </ul>
@@ -152,7 +186,7 @@ if (!empty($rows['image'])) {
 
                                         <div class="row">
                                             <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                                            <div class="col-lg-9 col-md-8"><?= $rows['full_name']?></div>
+                                            <div class="col-lg-9 col-md-8"><?= $fullname ?></div>
                                         </div>
 
                                         <div class="row">
@@ -194,7 +228,7 @@ if (!empty($rows['image'])) {
                                             <div class="row mb-3">
                                                 <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                                 <div class="col-md-8 col-lg-9">
-                                                    <?=  $image ?>
+                                                    <?= $image ?>
                                                     <div class="pt-2">
                                                         <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
                                                         <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
@@ -380,7 +414,7 @@ if (!empty($rows['image'])) {
     <?php } ?>
 
 
-     <?= AppFooterPage(); ?>
+    <?= AppFooterPage(); ?>
 
 </body>
 

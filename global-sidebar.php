@@ -4,10 +4,22 @@
 $file = trim($_SERVER['PHP_SELF'], "\" ");
 $pageLoad =  basename($file);
 
-$connect = "";
+$stdSelf = $connect = "";
 if ($pageLoad === "view.profile.php" && $_SESSION["role"] === "1") {
    $connect = "admin/";
 }
+
+
+$file2 = $_SERVER['PHP_SELF'];
+$parts2 = explode('/', trim($file2, '/'));
+$pageLoad2 = implode('/', array_slice($parts2, -2));
+
+if ($pageLoad2 === "students/index.php") {
+    $connect = "../";
+    $stdSelf = "students/";
+}
+
+
 // var_dump('<pre>',$_POST,$_GET,$_SESSION,$_SERVER,$pageLoad);die;
 ?>
 
@@ -35,7 +47,7 @@ if ($pageLoad === "view.profile.php" && $_SESSION["role"] === "1") {
         </li><!-- End Profile Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="users-profile.html">
+            <a class="nav-link collapsed" href="<?=$connect?>students/">
                 <i class="bi bi-person"></i>
                 <span>Student Management</span>
             </a>

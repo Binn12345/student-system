@@ -2,22 +2,23 @@
 require_once "db.php";
 
 
-function getRoles($rid) {
-    global $conn;
+function getRoles($rid)
+{
+  global $conn;
 
-    if (empty($rid)) return '';
+  if (empty($rid)) return '';
 
-    $stmt = $conn->prepare("SELECT role_name FROM roles WHERE id=?");
-    $stmt->bind_param("i", $rid);
-    $stmt->execute();
+  $stmt = $conn->prepare("SELECT role_name FROM roles WHERE id=?");
+  $stmt->bind_param("i", $rid);
+  $stmt->execute();
 
-    $result = $stmt->get_result();
+  $result = $stmt->get_result();
 
-    if ($row = $result->fetch_assoc()) {
-        return $row['role_name'];
-    }
+  if ($row = $result->fetch_assoc()) {
+    return $row['role_name'];
+  }
 
-    return '';
+  return '';
 }
 function showUserRole($selected = '')
 {
@@ -40,10 +41,11 @@ function showUserRole($selected = '')
   return $output;
 }
 
-function AppHeadPage($isFolder = false)
+function AppHeadPage($isFolder = false, $dito = false)
 {
+  // var_dump($isFolder, $dito);
   $assets = "assets";
-  if ($isFolder) $assets = "../assets";
+  if ($isFolder) $assets = ($dito) ? "../../assets" : "../assets";
   return "<head>
         <meta charset='utf-8'>
         <meta content='width=device-width, initial-scale=1.0' name='viewport'>
@@ -102,6 +104,10 @@ function AppHeadPage($isFolder = false)
             color: #fff;
             border: none;
             cursor: pointer;
+        }
+
+        .nav-href {
+          color: #4154f1 !important;
         }
     </style>
         ";
@@ -191,11 +197,11 @@ function AppLoginPage()
 }
 
 
-function AppFooterPage($isFolder = false)
+function AppFooterPage($isFolder = false, $dito = false)
 {
   // var_dump($isFolder);die;
   $assets = "assets";
-  if ($isFolder) $assets = "../assets";
+  if ($isFolder) $assets = ($dito) ? "../../assets" : "../assets";
   return "<a href='#' class='back-to-top d-flex align-items-center justify-content-center'><i class='bi bi-arrow-up-short'></i></a>
 
     <!-- Vendor JS Files -->
@@ -211,4 +217,33 @@ function AppFooterPage($isFolder = false)
 
     <!-- Template Main JS File -->
     <script src='$assets/js/main.js'></script>";
+}
+
+
+function generateStudentNo($conn)
+{
+  $date = date('Ymd'); // 20260422
+
+  $sql = "SELECT COUNT(*) as total FROM students WHERE student_no LIKE '$date%'";
+  $res = mysqli_query($conn, $sql);
+  $row = mysqli_fetch_assoc($res);
+
+  $next = str_pad($row['total'] + 1, 3, '0', STR_PAD_LEFT);
+
+  return $date . $next;
+}
+
+function getYearLevelDesc($y) {
+
+  $yeards = array('1'=>'First Year','2'=>'Second Year','3' => 'Third Year','4' => 'Fourth Year','5' => 'Fifth Year');
+  return $yeards[$y];
+}
+
+function getStatusDesc($s)
+{
+  global $conn;
+  $res = mysqli_query($conn, "SELECT description FROM tblStudStats WHERE id='{$s}' LIMIT 1");
+  $row = mysqli_fetch_assoc($res);
+
+  return $row['description'];
 }

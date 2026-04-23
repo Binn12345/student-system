@@ -20,7 +20,7 @@ if (!isset($_SESSION['user_id'])) {
 <!DOCTYPE html>
 <html lang="en">
 
-<?= AppHeadPage(true); ?>
+<?= AppHeadPage(true,'StudSetup'); ?>
 
 <body>
 

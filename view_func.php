@@ -41,11 +41,21 @@ function showUserRole($selected = '')
   return $output;
 }
 
-function AppHeadPage($isFolder = false, $dito = false)
+function AppHeadPage($isFolder = false, $mod = '')
 {
   // var_dump($isFolder, $dito);
   $assets = "assets";
-  if ($isFolder) $assets = ($dito) ? "../../assets" : "../assets";
+  if ($isFolder) {
+    // $assets = $mod == "StudSetup" ? "../../assets" : $mod == "acadSetup" ? " ../../../assets " : "../assets";
+    $assetMap = [
+        "StudSetup" => "../../assets",
+        "acadSetup" => "../../../assets",
+    ];
+
+    $assets = $assetMap[$mod] ?? "../assets";
+  }
+
+
   return "<head>
         <meta charset='utf-8'>
         <meta content='width=device-width, initial-scale=1.0' name='viewport'>
@@ -197,11 +207,23 @@ function AppLoginPage()
 }
 
 
-function AppFooterPage($isFolder = false, $dito = false)
+function AppFooterPage($isFolder = false, $mod = false)
 {
   // var_dump($isFolder);die;
   $assets = "assets";
-  if ($isFolder) $assets = ($dito) ? "../../assets" : "../assets";
+  // if ($isFolder) $assets = ($dito) ? "../../assets" : "../assets";
+
+  if ($isFolder) {
+
+    $assetMap = [
+          "StudSetup" => "../../assets",
+          "acadSetup" => "../../../assets",
+      ];
+
+      $assets = $assetMap[$mod] ?? "../assets";
+  }
+
+  
   return "<a href='#' class='back-to-top d-flex align-items-center justify-content-center'><i class='bi bi-arrow-up-short'></i></a>
 
     <!-- Vendor JS Files -->

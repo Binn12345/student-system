@@ -20,7 +20,7 @@ if (!isset($_SESSION['user_id'])) {
 <!DOCTYPE html>
 <html lang="en">
 
-<?= AppHeadPage(true, true); ?>
+<?= AppHeadPage(true, 'StudSetup'); ?>
 
 <style>
     #tblUsers {
@@ -229,7 +229,7 @@ if (!isset($_SESSION['user_id'])) {
         </section>
 
     </main><!-- End #main -->
-    <?= AppFooterPage(true, true); ?>
+    <?= AppFooterPage(true, 'StudSetup'); ?>
 
     <script>
         $(document).ready(function() {

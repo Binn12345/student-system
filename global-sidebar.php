@@ -20,6 +20,9 @@ if ($pageLoad2 === "students/index.php") {
 } else if ($pageLoad2 === "school-year-setup/index.php") {
     $connect = "../../";
     $stdSelf = "school-year-setup/";
+} else if ($pageLoad2 === "school-semester-setup/index.php") {
+    $connect = "../../";
+    $stdSelf = "school-year-setup/";
 }
 
 

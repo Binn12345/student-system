@@ -33,7 +33,7 @@ try {
     $password = password_hash($yourPassIsLastName, PASSWORD_DEFAULT);
     $fullname = $last . ', ' . $first . ' ' . $middle;
     $d = 1;
-    $d2 = $d + 1;
+    $d2 = 5;
 
     $stmt1 = $conn->prepare("INSERT INTO users 
 (username, `password`, full_name, `role`, `status`)

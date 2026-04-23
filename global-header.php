@@ -1,4 +1,4 @@
-/* DARK MODE */
+
 <style>
     .dark-mode {
         background-color: #121212 !important;
@@ -10,11 +10,13 @@
         background-color: #1e1e1e !important;
     }
 
-    /* optional: header */
+
     .dark-mode .header {
         background-color: #1a1a1a !important;
     }
 </style>
+
+
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -187,24 +189,39 @@
 
             </li><!-- End Messages Nav -->
 
+
+       
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+                    <?php if (!empty($_SESSION['image'])) { ?>
+                        <img src="data:image/jpeg;base64,<?= base64_encode($_SESSION['image']); ?>" 
+                            class="rounded-circle" 
+                            alt="Profile">
+                    <?php } else { ?>
+                        <img src="assets/img/profile-img.jpg" 
+                            class="rounded-circle" 
+                            alt="Profile">
+                    <?php } ?>
+                    <!-- <img src='data:image/jpeg;base64," . base64_encode(<?php $row['image'] ?>) . "' class='rounded-circle' alt='Profile'> -->
+                    
+                    <!-- <img src="assets/img/profile-img.jpg"  class="rounded-circle"> -->
+                  
+                    
                     <span class="d-none d-md-block dropdown-toggle ps-2"><?= $_SESSION['username'] ?></span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>Kevin Anderson</h6>
-                        <span>Web Designer</span>
+                        <h6><?= $_SESSION['username'] ?></h6>
+                        <span><?= getRoles($_SESSION['role']) ?></span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                        <a class="dropdown-item d-flex align-items-center" href="../view.profile.php?uid=<?=$_SESSION['username']?>">
                             <i class="bi bi-person"></i>
                             <span>My Profile</span>
                         </a>
@@ -214,7 +231,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                        <a class="dropdown-item d-flex align-items-center" href="../view.profile.php?d=um&uid=<?=$_SESSION['username']?>">
                             <i class="bi bi-gear"></i>
                             <span>Account Settings</span>
                         </a>

@@ -247,3 +247,12 @@ function getStatusDesc($s)
 
   return $row['description'];
 }
+
+
+function getTotalStudent($conn)
+{
+  $res = mysqli_query($conn,"SELECT COUNT(*) AS total FROM students LEFT JOIN users ON users.username=students.student_no
+WHERE `role`='5'");
+  $row = mysqli_fetch_assoc($res);
+  return $row["total"];
+}

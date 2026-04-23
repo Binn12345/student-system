@@ -22,6 +22,7 @@ if($result->num_rows > 0){
         // SESSION
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
+         $_SESSION['image'] = $user['image'];
         $_SESSION['role'] = $user['role'];
 
         $response = [

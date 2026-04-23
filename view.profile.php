@@ -80,7 +80,7 @@ if (!empty($rows['image'])) {
     <?php require_once('global-sidebar.php'); ?>
     <!-- End Sidebar-->
 
-    <?php if ($row == 0 || !in_array($_GET['d'],array("sm","um"))) { ?>
+    <?php if ($row == 0 || !in_array($_GET['d'],array("sm","um",""))) { ?>
 
         <main id="main" class="main">
             <div class="container">
@@ -125,7 +125,7 @@ if (!empty($rows['image'])) {
                                 <?= $image ?>
                                 <!-- <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle"> -->
                                 <h2><?= $fullname ?></h2>
-                                <h3><?= $role ?></h3>
+                                <h3><?= getRoles($role) ?></h3>
                                 <div class="social-links mt-2">
                                     <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                                     <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -170,10 +170,14 @@ if (!empty($rows['image'])) {
                                         $hrf = "admin/students";
                                     } 
                                     ?>
+                                    
 
+
+                                    <?php if(isset($_GET["d"]) && $_GET["d"]) { ?>
                                     <li class="nav-item">
                                         <a class="nav-link  nav-href" href="<?= $hrf ?>" >Back to <?= $loc ?></a>
                                     </li>
+                                    <?php } ?>
 
                                 </ul>
                                 <div class="tab-content pt-2">
